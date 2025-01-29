@@ -35,12 +35,14 @@ namespace SalesWebMvc.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult Delete(int? id) { if (id == null)
+        public IActionResult Delete(int? id) 
+        {   
+            if (id == null)
             { 
                 return NotFound();
             } 
 
-        var obj = _sellerService.FindById(id.Value);
+            var obj = _sellerService.FindById(id.Value);
             if (obj == null)
             {
                 return NotFound();
@@ -55,5 +57,22 @@ namespace SalesWebMvc.Controllers
             _sellerService.Remove(id);
             return RedirectToAction(nameof(Index));
         }
+
+        public IActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var obj = _sellerService.FindById(id.Value);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+            return View(obj);
+        }
+       
     }
+
 }
